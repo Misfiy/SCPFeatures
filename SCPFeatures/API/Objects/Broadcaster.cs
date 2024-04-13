@@ -5,7 +5,7 @@ namespace SCPFeatures.API.Objects;
 
 public class Broadcaster
 {
-    public string Text { get; set; }
+    public string Text { get; set; } = string.Empty;
     public ushort Duration { get; set; }
     public BroadcasterType Type { get; set; }
 
