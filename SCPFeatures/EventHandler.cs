@@ -24,6 +24,7 @@ public class EventHandler
         if (!_config.BleedingDamageTypes.IsEmpty())
         {
             Exiled.Events.Handlers.Player.Hurt += DoBleeding;
+            Exiled.Events.Handlers.Player.UsingItemCompleted += DoBleedingCure;
         }
     }
 
@@ -42,6 +43,7 @@ public class EventHandler
         if (!_config.BleedingDamageTypes.IsEmpty())
         {
             Exiled.Events.Handlers.Player.Hurt -= DoBleeding;
+            Exiled.Events.Handlers.Player.UsingItemCompleted -= DoBleedingCure;
         }
     }
 
@@ -50,6 +52,13 @@ public class EventHandler
         if (ev.Player.IsScp || !_config.BleedingDamageTypes.Contains(ev.DamageHandler.Type)) return;
 
         ev.Player.EnableEffect(EffectType.Bleeding);
+    }
+
+    private void DoBleedingCure(UsingItemCompletedEventArgs ev)
+    {
+        if (!_config.BleedingCures.Contains(ev.Usable.Type)) return;
+
+        ev.Player.DisableEffect(EffectType.Bleeding);
     }
     
     private void ZombieHurtingConversion(HurtEventArgs ev) => CheckZombieConversion(ev.Player, ev.Attacker);
