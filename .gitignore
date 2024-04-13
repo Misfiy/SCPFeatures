@@ -1,0 +1,7 @@
+﻿lib/
+obj/
+bin/
+.git/
+.vs/
+packages/
+.idea/
